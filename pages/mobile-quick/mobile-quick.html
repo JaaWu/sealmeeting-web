@@ -1,0 +1,33 @@
+<div class="rong-mobile">
+  <p class="rong-mobile-title-box">
+    <i class="rong-mobile-title-logo"></i>
+    <span>SealMeeting 视频会议</span>
+  </p>
+  
+  <div v-if="isCanStart" class="rong-mobile-content-box">
+    <p class="rong-mobile-meeting-id-title">会议 ID</p>
+    <p class="rong-mobile-meeting-id"><b>{{meetingId}}</b></p>
+    <a class="rong-mobile-meeting-btn" :href="mobileLinkUrl" target="_blank">一键入会</a>
+  
+    <div class="rong-mobile-fotter">
+      <p class="rong-mobile-install-promp">若您未安装 SealMeeting 客户端, 请安装后刷新此页面</p>
+      <a class="rong-mobile-install-ios" :href="installUrl">SealMeeting iOS 版</a>
+    </div>
+  </div>
+  <div v-else-if="isIOS"  class="rong-mobile-unsupport-box">
+    <p class="rong-mobile-meeting-id">暂不支持当前浏览器</p>
+    <img class="rong-mobile-unsupport-img" src="assets/img/unsupport.png" alt="">
+    <br>
+    <button id="copyBtn" ref="copyBtn" :data-clipboard-text="meetingUrl" class="rong-mobile-copy-address">点击此处复制会议链接</button>
+  
+    <div class="rong-mobile-fotter">
+      <p>请在 <b>Chrome</b> 或 <b>Safari</b> 中打开此页面, 即可加入会议</p>
+    </div>
+  </div>
+  <div v-else class="rong-mobile-unsupport-box">
+    <p class="rong-mobile-meeting-id">SealMeeting 暂不支持您的操作系统</p>
+    <p class="rong-mobile-meeting-id rong-mobile-meeting-android">推荐您在 PC 端使用 Chrome 或在 iOS 端访问此页面以加入会议</p>
+    <img class="rong-mobile-unsupport-img" src="assets/img/unsupport.png" alt="">
+    <br>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="rong-recent-share-list">
+  <ul>
+    <li v-if="displayAssistant" @click="displayUser(displayAssistant)">
+      <component is="rtc-user" :user="displayAssistant" :isBanZoom="true" :isShowThumbnail="true"></component>
+    </li>
+    <li v-if="displayTeacher" @click="displayUser(displayTeacher)">
+      <component is="rtc-user" :user="displayTeacher" :isBanZoom="true" :isShowThumbnail="true"></component>
+    </li>
+    <li v-for="whiteboard, index in displayedWhiteboardList" @click="displayWB(whiteboard)">
+      <div class="rong-resource-list-whiteboard">
+        <span>
+          白板 {{getDisplayName(index)}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

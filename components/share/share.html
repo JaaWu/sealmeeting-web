@@ -1,0 +1,19 @@
+<ul class="rong-user-share-box">
+  <li @click="copyShareUrl">
+    <i class="rong-user-share-icon-copy"></i><span>复制邀请信息</span>
+    <div class="rong-user-share-line"></div>
+  </li>
+  <li @click="sendEmail">
+    <!-- <a class="rong-user-share-link" :href="emailUrl"></a> -->
+    <i class="rong-user-share-icon-email"></i><span>邮件邀请</span>
+    <div class="rong-user-share-line"></div>
+  </li>
+  <li @click="showQRCode">
+    <i class="rong-user-share-icon-scan"></i><span>二维码邀请</span>
+    <div class="rong-user-share-line"></div>
+  </li>
+  <!-- <li>
+    <i class="rong-user-share-icon-msg"></i><span>短信邀请</span>
+  </li> -->
+  <i class="rong-user-share-arrow"></i>
+</ul>

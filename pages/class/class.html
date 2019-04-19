@@ -1,0 +1,33 @@
+<div class="rong-class-box">
+  <div class="rong-class-info-box">
+    <component is="class-info" :classInfo="classInfo"></component>
+  </div>
+  <div class="rong-class-content-box">
+    <div class="rong-class-whiteboard-box">
+      <component v-if="classInfo" is="display" :classInfo="classInfo" :loginUser="loginUser" :userList="userList" :assistant="assistant" :teacher="teacher"></component>
+    </div>
+    <div class="rong-class-active-box">
+      <div class="rong-class-rtc-box">
+        <component v-if="classInfo" is="rong-rtc" :classInfo="classInfo" :hungup="hungup" :userList="userList" :loginUser="loginUser"></component>
+        <div v-else class="rong-rtc">
+          <div class="rong-rtc-teacher-box">
+            <div class="rong-rtc-teacher-empty">
+              <p>请耐心等待</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rong-class-members-box">
+        <div class='rong-class-tab-box'>
+          <div v-for="tab in tabList" class="rong-class-tab" :class="{ 'rong-class-tab-selected': selectedTab == tab }">
+            <span @click="selectTab(tab)">{{tab.name}}</span>
+          </div>
+          <div class="rong-members-content">
+            <component v-if="classInfo" v-show="selectedTab.tag === 'chat'" is="chat" :userList="userList" :loginUser="loginUser"></component>
+            <component v-if="classInfo" v-show="selectedTab.tag === 'user-list'" is="user-list" :userList="userList" :loginUser="loginUser"></component>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

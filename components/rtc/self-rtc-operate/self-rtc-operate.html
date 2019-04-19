@@ -1,0 +1,9 @@
+<div class="rong-user-operate" v-if="loginUser">
+  <i class="rong-user-operate-icon rong-user-operate-share" @click="switchShare"></i>
+  <i class="rong-user-operate-icon rong-user-operate-micro" :disabled="isDisabled" :closed="!isAudioOpened" @click="switchAudio"></i>
+  <i class="rong-user-operate-icon rong-user-operate-camera" :disabled="isDisabled" :closed="!isVideoOpened" @click="switchVideo"></i>
+  <i class="rong-user-operate-icon rong-user-operate-volume" :closed="isMuted" @click="switchVolume"></i>
+  <i class="rong-user-operate-icon rong-user-operate-hungup" @click="confirmHungup(true)"></i>
+
+  <components v-if="isShowShare" is="share"></components>
+</div>

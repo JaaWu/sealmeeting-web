@@ -1,12 +1,12 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
 
   var Vue = dependencies.Vue;
   var VueRouter = dependencies.VueRouter;
-  var routes = RongClass.routes;
+  var routes = RongMeeting.routes;
 
-  var utils = RongClass.utils,
-    ENUM = RongClass.ENUM;
+  var utils = RongMeeting.utils,
+    ENUM = RongMeeting.ENUM;
   var browserType = utils.getBrowserType(),
     isMobile = browserType === ENUM.BrowserType.MOBILE;
 
@@ -17,7 +17,7 @@
     });
     router.beforeEach(function (to, from, next) {
       var toName = to.name;
-      var instance = RongClass.instance || {};
+      var instance = RongMeeting.instance || {};
       var auth = instance.auth;
 
       var meetingData = utils.formatUrl();
@@ -49,9 +49,12 @@
         };
       },
       mixins: [
-        RongClass.mixins.locale
+        RongMeeting.mixins.locale
       ],
       computed: {
+        selfVideoClassName: function () {
+          return 'rong-video-self';
+        }
       },
       methods: {
         setMute: function (isMute) {
@@ -63,12 +66,12 @@
       }
     });
 
-    RongClass.instance = rongClass;
+    RongMeeting.instance = rongClass;
   }
 
-  RongClass.init = init;
+  RongMeeting.init = init;
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   VueRouter: window.VueRouter
 });

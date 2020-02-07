@@ -1,11 +1,11 @@
-(function (RongClass/* dependencies */) {
+(function (RongMeeting/* dependencies */) {
   'use strict';
-  var utils = RongClass.utils;
+  var utils = RongMeeting.utils;
   // win = dependencies.win;
-  var setting = RongClass.setting,
-    components = RongClass.components,
+  var setting = RongMeeting.setting,
+    components = RongMeeting.components,
     toastTime = setting.class.toastTime,
-    ENUM = RongClass.ENUM,
+    ENUM = RongMeeting.ENUM,
     DialogType = ENUM.DialogType,
     ButtonsType = DialogType.BUTTONS;
 
@@ -79,7 +79,7 @@
     var destroyTimeout = options.destroyTimeout || toastTime;
     var onDestoryed = options.onDestoryed || utils.noop;
 
-    var common = RongClass.common;
+    var common = RongMeeting.common;
 
     return common.mountDialog({
       name: 'rong-dialog',
@@ -185,6 +185,10 @@
       options.type = DialogType.TOAST;
       return dialog(options);
     },
+    mobileToast: function (options) {
+      options.type = DialogType.MOBILE_TOAST;
+      return dialog(options);
+    },
     joining: function (content, canceled) {
       return dialog({
         type: DialogType.JOINING,
@@ -197,8 +201,8 @@
     }
   };
 
-  RongClass.dialog = utils.extend(dialog, dialogs);
+  RongMeeting.dialog = utils.extend(dialog, dialogs);
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   win: window
 });

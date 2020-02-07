@@ -1,8 +1,8 @@
-(function (RongClass) {
+(function (RongMeeting) {
   
-  var components = RongClass.components;
+  var components = RongMeeting.components;
 
-  RongClass.routes = {
+  RongMeeting.routes = {
     maps: [
       {
         path: '/login',
@@ -26,4 +26,4 @@
     ]
   };
   
-})(window.RongClass);
+})(window.RongMeeting);

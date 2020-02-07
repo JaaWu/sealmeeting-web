@@ -1,8 +1,8 @@
-(function (RongClass) {
+(function (RongMeeting) {
   'use strict';
-  var utils = RongClass.utils,
-    server = RongClass.dataModel.server,
-    dialog = RongClass.dialog;
+  var utils = RongMeeting.utils,
+    server = RongMeeting.dataModel.server,
+    dialog = RongMeeting.dialog;
 
   var removeSelf = function (context) {
     context.isShow = false;
@@ -10,8 +10,8 @@
     parent.removeChild(context.$el);
   };
 
-  RongClass.dialog.createWB = function (options) {
-    var common = RongClass.common;
+  RongMeeting.dialog.createWB = function (options) {
+    var common = RongMeeting.common;
 
     options = options || {};
     var success = options.success || utils.noop;
@@ -47,4 +47,4 @@
     });
   };
 
-})(window.RongClass);
+})(window.RongMeeting);

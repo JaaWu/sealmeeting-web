@@ -1,9 +1,9 @@
-(function (RongClass) {
+(function (RongMeeting) {
   'use strict';
-  var utils = RongClass.utils,
-    ENUM = RongClass.ENUM,
+  var utils = RongMeeting.utils,
+    ENUM = RongMeeting.ENUM,
     RoleENUM = ENUM.Role,
-    server = RongClass.dataModel.server;
+    server = RongMeeting.dataModel.server;
 
   var removeSelf = function (context) {
     context.isShow = false;
@@ -17,8 +17,8 @@
       return user;
     });
   }
-  RongClass.dialog.degrade = function (options) {
-    var common = RongClass.common;
+  RongMeeting.dialog.degrade = function (options) {
+    var common = RongMeeting.common;
 
     options = options || {};
     var userList = options.userList || [],
@@ -78,4 +78,4 @@
     });
   };
 
-})(window.RongClass);
+})(window.RongMeeting);

@@ -62,6 +62,11 @@
     <template v-else-if="type === DialogType.TOAST">
       <span class="rong-dialog-toast-content">{{content}}</span>
     </template>
+
+    <template v-else-if="type === DialogType.MOBILE_TOAST">
+      <i class="rong-dialog-mobile-toast-mark"></i>
+      <span class="rong-dialog-toast-content">{{content}}</span>
+    </template>
     
     <template v-else>
       <h3 v-if="title">{{title}}</h3>

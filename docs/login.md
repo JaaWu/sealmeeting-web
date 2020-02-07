@@ -1,5 +1,7 @@
 ## 登录页面
 
+![image](image/login.png)
+
 ### 文件位置
 
 `UI 模板`: pages/login/login.html

@@ -1,10 +1,10 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
     win = dependencies.win,
-    dialog = RongClass.dialog;
+    dialog = RongMeeting.dialog;
 
   var loadingWB;
 
@@ -33,7 +33,7 @@
       };
       try {
         iframe.contentWindow.onclick = function (event) {
-          RongClass.instance.$emit('fullClick', event);
+          RongMeeting.instance.$emit('fullClick', event);
         };
         // var iframeWin = iframe.contentWindow.window;
         // watchWindowKeydown(context, iframeWin);
@@ -81,7 +81,7 @@
       },
       computed: {
         displayUrl: function () {
-          var auth = RongClass.instance.auth,
+          var auth = RongMeeting.instance.auth,
             loginUser = auth.loginUser;
           var uri = this.display.uri;
           uri += '&role={role}&roomId={roomId}&authorization={authorization}';
@@ -110,7 +110,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

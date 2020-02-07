@@ -1,7 +1,7 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common;
+  var common = RongMeeting.common;
 
   function getMethods() {
     return {
@@ -28,6 +28,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

@@ -1,22 +1,25 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
-  var utils = RongClass.utils,
-    common = RongClass.common,
-    dialog = RongClass.dialog,
-    dataModel = RongClass.dataModel,
+  var utils = RongMeeting.utils,
+    common = RongMeeting.common,
+    dialog = RongMeeting.dialog,
+    dataModel = RongMeeting.dataModel,
     storage = common.storage;
+
+  var randomlyGeneratedName; // 自动生成的名字
 
   var loadDialog;
 
   var EntryCode = 13;
 
-  var StorageKey = RongClass.ENUM.StorageKey,
-    SpecialErrorCode = RongClass.ENUM.SpecialErrorCode;
+  var StorageKey = RongMeeting.ENUM.StorageKey,
+    SpecialErrorCode = RongMeeting.ENUM.SpecialErrorCode,
+    RoleENUM = RongMeeting.ENUM.Role;
   
-  var resolutionSetting = RongClass.setting.rtc.resolution;
+  var resolutionSetting = RongMeeting.setting.rtc.resolution;
 
   function toClassPage(data) {
-    var instance = RongClass.instance;
+    var instance = RongMeeting.instance;
     data.isLogined = true;
     instance.$router.push({
       name: 'class',
@@ -43,6 +46,9 @@
       position: utils.getCenterPosition(),
       confirmed: function () {
         context.isAudience = true;
+        if (context.userName === randomlyGeneratedName) {
+          context.userName = randomlyGeneratedName = utils.generateName(RoleENUM.AUDIENCE);
+        }
         context.entryClass();
       }
     });
@@ -149,14 +155,14 @@
         }
       },
       mixins: [
-        RongClass.mixins.validate
+        RongMeeting.mixins.validate
       ],
       mounted: function () {
         var context = this;
         var meetingInfo = utils.formatUrl();
         if (meetingInfo.mId) {
           context.roomId = meetingInfo.mId;
-          context.userName = utils.generateName();
+          context.userName = randomlyGeneratedName = utils.generateName(RoleENUM.STUDENT);
           context.isAudience = false;
           context.isVideoClosed = false;
           context.$nextTick(function () {
@@ -169,7 +175,7 @@
     common.component(options, resolve);
   };
   
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

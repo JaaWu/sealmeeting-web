@@ -1,9 +1,10 @@
-(function (RongClass) {
+(function (RongMeeting) {
   'use strict';
 
-  var RTCTag = RongClass.ENUM.RTCTag;
-  var common = RongClass.common,
-    RoleENUM = RongClass.ENUM.Role;
+  var RTCTag = RongMeeting.ENUM.RTCTag;
+  var common = RongMeeting.common,
+    server = RongMeeting.dataModel.server,
+    RoleENUM = RongMeeting.ENUM.Role;
 
   var DialogHandle = {
     Dialogs: {},
@@ -51,6 +52,11 @@
         };
       },
       computed: {
+        isSelf: function () {
+          var loginUserId = server.getLoginUserId(),
+            user = this.user;
+          return loginUserId === user.id;
+        },
         displayUserName: function () {
           var user = this.user;
           return common.getUserName(user);
@@ -64,6 +70,9 @@
           var user = this.user || {};
           var role = user.role;
           return role === RoleENUM.AUDIENCE;
+        },
+        selfVideoClassName: function () {
+          return RongMeeting.instance.selfVideoClassName;
         }
       },
       mounted: function () {
@@ -91,6 +100,6 @@
   var rtcWindow = dialog;
   rtcWindow.Handler = DialogHandle;
 
-  RongClass.dialog.rtcWindow = rtcWindow;
+  RongMeeting.dialog.rtcWindow = rtcWindow;
 
-})(window.RongClass);
+})(window.RongMeeting);

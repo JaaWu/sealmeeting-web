@@ -1,6 +1,6 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
-  var common = RongClass.common;
+  var common = RongMeeting.common;
   var win = dependencies.win;
 
   function removeSelf(context) {
@@ -46,8 +46,8 @@
     });
   };
 
-  RongClass.dialog.shareQRCode = dialog;
+  RongMeeting.dialog.shareQRCode = dialog;
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   win: window
 });

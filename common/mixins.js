@@ -1,6 +1,6 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
-  var utils = RongClass.utils;
+  var utils = RongMeeting.utils;
   var Vue = dependencies.Vue;
 
   /* 输入校验 */
@@ -138,8 +138,8 @@
     return {
       name: 'rong-locale',
       data: function () {
-        var lang = RongClass.setting.lang;
-        var locale = RongClass.locale[lang];
+        var lang = RongMeeting.setting.lang;
+        var locale = RongMeeting.locale[lang];
         return {
           locale: locale
         }
@@ -152,11 +152,11 @@
     }
   })();
 
-  RongClass = RongClass || {};
-  RongClass.mixins = {
+  RongMeeting = RongMeeting || {};
+  RongMeeting.mixins = {
     validate: validate,
     locale: locale
   };
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
 });

@@ -1,5 +1,7 @@
 ## 共享展示区
 
+![image](../image/display.png)
+
 ### 文件位置
 
 `UI 模板`: components/display/display.html

@@ -1,16 +1,16 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
-  var utils = RongClass.utils,
-    common = RongClass.common,
+  var utils = RongMeeting.utils,
+    common = RongMeeting.common,
     RongIMLib = dependencies.RongIMLib,
     RongIMClient = RongIMLib.RongIMClient,
     win = dependencies.win,
     emitter = utils.EventEmitter,
-    UploadUrl = RongClass.setting.upload.url,
-    server = RongClass.dataModel.server;
+    UploadUrl = RongMeeting.setting.upload.url,
+    server = RongMeeting.dataModel.server;
 
-  var ErrorCode = RongClass.ErrorCode,
-    ENUM = RongClass.ENUM,
+  var ErrorCode = RongMeeting.ErrorCode,
+    ENUM = RongMeeting.ENUM,
     RoomAction = ENUM.RoomAction,
     DisplayType = ENUM.DisplayType,
     RoleENUM = ENUM.Role,
@@ -22,7 +22,7 @@
   var RoomConversationType = RongIMLib.ConversationType.GROUP;
 
   var handleRoomMemberChangeMessage = function (message) {
-    var server = RongClass.dataModel.server;
+    var server = RongMeeting.dataModel.server;
     // 区分 joined || leave || kick
     // emit 相关事件
     var content = message.content,
@@ -99,7 +99,7 @@
       emitter.emit(eventName, content);
     },
     ApplyForSpeechMessage: function (message) {
-      var server = RongClass.dataModel.server;
+      var server = RongMeeting.dataModel.server;
       var content = message.content,
         userId = content.reqUserId,
         userName = content.reqUserName || server.getUserById(userId).userName;
@@ -112,7 +112,7 @@
       emitter.emit(Event.USER_APPLY_SPEECH_RESULT, content);
     },
     TicketExpiredMessage: function (message) {
-      var server = RongClass.dataModel.server;
+      var server = RongMeeting.dataModel.server;
       var content = message.content,
         fromUserId = content.fromUserId;
       if (fromUserId === server.getLoginUserId()) {
@@ -173,7 +173,7 @@
   function isRoomMessage(message) {
     var conversationType = message.conversationType,
       targetId = message.targetId;
-    var instance = RongClass.instance || {},
+    var instance = RongMeeting.instance || {},
       auth = instance.auth || {},
       roomId = auth.roomId;
     return conversationType === RoomConversationType && roomId === targetId;
@@ -347,7 +347,7 @@
       // 默认 false, true 启用自动重连，启用则为必选参数
       auto: true,
       // 网络嗅探地址 [http(s)://]cdn.ronghub.com/RongIMLib-2.2.6.min.js 可选
-      url: RongClass.setting.im.reconnectUrl,
+      url: RongMeeting.setting.im.reconnectUrl,
       // 重试频率 [100, 1000, 3000, 6000, 10000, 18000] 单位为毫秒，可选
       rate: rates
     };
@@ -366,7 +366,7 @@
   function sendClassMessage(msg, callbacks) {
     callbacks = callbacks || {};
     callbacks.onSuccess = callbacks.onSuccess || utils.noop;
-    var auth = RongClass.instance.auth || {};
+    var auth = RongMeeting.instance.auth || {};
     var targetId = auth.roomId;
     var conversationType = RoomConversationType;
     RongIMClient.getInstance().sendMessage(conversationType, targetId, msg, {
@@ -388,7 +388,7 @@
    * @param {object} callbacks 回调函数对象
    */
   function sendTextMessage(content, callbacks) {
-    var instance = RongClass.instance || {},
+    var instance = RongMeeting.instance || {},
       auth = instance.auth || {},
       loginUser = auth.loginUser || {};
     var msg = new RongIMLib.TextMessage({
@@ -409,7 +409,7 @@
    * @param {object} callbacks 回调函数对象
    */
   function sendImageMessage(base64, uri, callbacks) {
-    var instance = RongClass.instance || {},
+    var instance = RongMeeting.instance || {},
       auth = instance.auth || {},
       loginUser = auth.loginUser || {};
     var msg = new RongIMLib.ImageMessage({
@@ -447,7 +447,7 @@
    */
   function getHistoryMessages(timestamp, callbacks) {
     var conversationType = RoomConversationType;
-    var auth = RongClass.instance.auth || {};
+    var auth = RongMeeting.instance.auth || {};
     var targetId = auth.roomId;
     var count = 20;
     var instance = RongIMClient.getInstance();
@@ -520,12 +520,12 @@
     logout: logout
   };
 
-  RongClass.dataModel = RongClass.dataModel || {};
-  utils.extend(RongClass.dataModel, {
+  RongMeeting.dataModel = RongMeeting.dataModel || {};
+  utils.extend(RongMeeting.dataModel, {
     chat: chat
   });
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   RongIMLib: window.RongIMLib,
   win: window
 });

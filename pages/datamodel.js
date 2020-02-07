@@ -1,13 +1,13 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
-  var Setting = RongClass.setting,
+  var Setting = RongMeeting.setting,
     win = dependencies.win,
-    utils = RongClass.utils,
-    common = RongClass.common,
+    utils = RongMeeting.utils,
+    common = RongMeeting.common,
     emitter = utils.EventEmitter,
     storage = common.storage;
   
-  var ENUM = RongClass.ENUM,
+  var ENUM = RongMeeting.ENUM,
     DisplayType = ENUM.DisplayType,
     Event = ENUM.Event,
     RTCKey = ENUM.RTCTag.RTC,
@@ -106,7 +106,7 @@
       server: Setting.server,
       url: url
     });
-    var instance = RongClass.instance || {};
+    var instance = RongMeeting.instance || {};
     var auth = instance.auth || {};
     var authorization = auth.authorization;
     var options = {
@@ -128,7 +128,7 @@
     
     return new win.Promise(function (resolve, reject) {
       var onFaild = function () {
-        reject({ errCode: RongClass.ErrorCode.NETWORK_UNAVAILABLE });
+        reject({ errCode: RongMeeting.ErrorCode.NETWORK_UNAVAILABLE });
       };
       options.success = function (result) {
         result = JSON.parse(result);
@@ -154,12 +154,12 @@
   };
 
   function getEnteredRoomId() {
-    var auth = RongClass.instance.auth || {};
+    var auth = RongMeeting.instance.auth || {};
     return auth.roomId;
   }
 
   function getLoginUser() {
-    var instance = RongClass.instance || {};
+    var instance = RongMeeting.instance || {};
     var auth = instance.auth || {};
     return auth;
   }
@@ -178,7 +178,7 @@
   }
 
   function getLoginUserDetail() {
-    var loginUserId = RongClass.instance.auth.userId;
+    var loginUserId = RongMeeting.instance.auth.userId;
     var userList = getUserList();
     var selfUser = userList.filter(function (user) {
       return user.id === loginUserId;
@@ -205,7 +205,7 @@
   }
 
   function setMediaEnable(isMic, enable/* isNotSync */) {
-    var rtcServer = RongClass.dataModel.rtc,
+    var rtcServer = RongMeeting.dataModel.rtc,
       loginUser = getLoginUserDetail();
 
     var event/* syncEvent */;
@@ -247,7 +247,7 @@
       }
       users.forEach(function (user) {
         _Cache.users.addUser(user);
-        var auth = RongClass.instance.auth || {};
+        var auth = RongMeeting.instance.auth || {};
         var selfUserId = auth.userId;
         if (user.userId === selfUserId) {
           emitter.emit(Event.SELF_USER_ROLE_CHANGED, user);
@@ -267,7 +267,7 @@
 
     /* 监听收到用户的流 */
     emitter.on(Event.STREAM_ADDED, function (user) {
-      var rtcModel = RongClass.dataModel.rtc;
+      var rtcModel = RongMeeting.dataModel.rtc;
       var rtcSwitch = rtcModel.getStreamSwitch(user.stream.type); /* 将 type 转化为 { video: boolean, audio: boolean } */
       user.stream = utils.extend(user.stream, rtcSwitch);
       user.isLoading = false;
@@ -334,7 +334,7 @@
 
   function leaveClassRoom(roomId) {
     roomId = roomId || getEnteredRoomId();
-    var selfUser = RongClass.instance.auth,
+    var selfUser = RongMeeting.instance.auth,
       selfUserId = selfUser.userId;
     var url = '/room/leave';
     return Http.post(url, {
@@ -355,7 +355,7 @@
       var user = getUserById(userId);
       user.action = RoomAction.KICK;
       emitter.emit(Event.USER_LEFT, user);
-      var rtcWindowHandler = RongClass.dialog.rtcWindow.Handler;
+      var rtcWindowHandler = RongMeeting.dialog.rtcWindow.Handler;
       rtcWindowHandler.destory(userId);
       return win.Promise.resolve(result);
     });
@@ -667,7 +667,7 @@
   }
 
   function checkAuth() {
-    var instance = RongClass.instance;
+    var instance = RongMeeting.instance;
     return instance && instance.auth;
   }
 
@@ -676,11 +676,11 @@
       userName = roomContent.userName,
       isAudience = roomContent.isAudience,
       isVideoClosed = roomContent.isVideoClosed;
-    var dataModel = RongClass.dataModel;
+    var dataModel = RongMeeting.dataModel;
     var roomInfo;
     return joinClassRoom(roomId, userName, isAudience, isVideoClosed).then(function (info) {
       roomInfo = info;
-      RongClass.instance.auth = roomInfo;
+      RongMeeting.instance.auth = roomInfo;
       var imParams = common.getIMParams(roomInfo.imToken);
       return dataModel.chat.init(imParams);
     }).then(function (userId) {
@@ -692,26 +692,26 @@
       roomInfo.loginUser = common.getLoginUser(roomInfo.members, roomInfo.userId);
       var roomData = utils.extend(roomContent, { videoEnable: !isVideoClosed });
       roomData = utils.extend(roomData, roomInfo);
-      RongClass.instance.auth = roomInfo;
+      RongMeeting.instance.auth = roomInfo;
       return win.Promise.resolve(roomData);
     });
   }
 
   function logout() {
-    var selfUser = RongClass.instance.auth;
+    var selfUser = RongMeeting.instance.auth;
     if (!selfUser) {
       return win.Promise.resolve();
     }
-    var rtcServer = RongClass.dataModel.rtc,
-      chatServer = RongClass.dataModel.chat,
-      rtcWindowHandler = RongClass.dialog.rtcWindow.Handler;
+    var rtcServer = RongMeeting.dataModel.rtc,
+      chatServer = RongMeeting.dataModel.chat,
+      rtcWindowHandler = RongMeeting.dialog.rtcWindow.Handler;
     return win.Promise.all([ leaveClassRoom(), rtcServer.leave ]).then(function () {
       rtcWindowHandler.clear();
       emitter.clear();
       chatServer.logout();
       _Cache.users.userList = [];
-      RongClass.instance.isMuted = false;
-      RongClass.instance.auth = null;
+      RongMeeting.instance.isMuted = false;
+      RongMeeting.instance.auth = null;
     });
     // return rtcServer.leave().then(function () {
     //   return leaveClassRoom();
@@ -770,9 +770,9 @@
     }
   };
 
-  RongClass.dataModel = RongClass.dataModel || {};
-  utils.extend(RongClass.dataModel, dataModel);
+  RongMeeting.dataModel = RongMeeting.dataModel || {};
+  utils.extend(RongMeeting.dataModel, dataModel);
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   win: window
 });

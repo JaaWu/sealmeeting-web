@@ -1,8 +1,9 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
-  var common = RongClass.common,
-    utils = RongClass.utils;
-  var mobileLink = RongClass.setting.mobileLink,
+  var win = dependencies.win;
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils;
+  var mobileLink = RongMeeting.setting.mobileLink,
     installUrl = mobileLink.installUrl;
   var browserName = utils.getBrowser().type;
   var supportBrowserList = [
@@ -32,29 +33,47 @@
         isIOS: function () {
           return utils.isIOSPlatform();
         },
+        isWeChat: function () {
+          return browserName === 'WeChat';
+        },
         installUrl: function () {
           return installUrl;
         }
       },
-      components: {
-      },
-      destroyed: function () {
+      methods: {
+        copy: function () {
+          utils.copyToClipBoard(this.meetingUrl);
+          RongMeeting.dialog.mobileToast({
+            content: '已复制会议链接',
+            destroyTimeout: 2000,
+            autoDestroy: true
+          });
+        },
+        startMeeting: function () {
+          var context = this;
+          var linkUrl = context.mobileLinkUrl;
+          var start = +new Date();
+          context.$nextTick(function () {
+            win.location.href = linkUrl;
+            setTimeout(() => {
+              var now = +new Date();
+              if (now - start < 2100) {
+                win.location.href = context.installUrl;
+              }
+            }, 2000);
+          });
+        }
       },
       mounted: function () {
-        var context = this;
-        context.$nextTick(function () {
-          var copyBtn = context.$refs.copyBtn;
-          copyBtn && utils.setCopyById(copyBtn.id);
-        });
-      },
-      methods: {
-        
+        if (this.isCanStart) {
+          this.startMeeting();
+        }
       }
     };
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

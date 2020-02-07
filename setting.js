@@ -1,5 +1,6 @@
 (function (win) {
   var setting = {
+    version: '1.0.1',
     lang: 'zh',
     server: 'https://api-xxxx/api', // SealMeeting Server 地址
     im: {

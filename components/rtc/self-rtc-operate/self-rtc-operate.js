@@ -1,19 +1,19 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
-  var common = RongClass.common,
-    utils = RongClass.utils,
-    dataModel = RongClass.dataModel,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
+    dataModel = RongMeeting.dataModel,
     rtcServer = dataModel.rtc,
-    dialog = RongClass.dialog,
+    dialog = RongMeeting.dialog,
     server = dataModel.server;
   
-  var ENUM = RongClass.ENUM,
-    RTCTag = RongClass.ENUM.RTCTag,
+  var ENUM = RongMeeting.ENUM,
+    RTCTag = RongMeeting.ENUM.RTCTag,
     RTCKey = RTCTag.RTC,
     RoleENUM = ENUM.Role;
 
   function hideShareWhenFullClick(context) {
-    var instance = RongClass.instance;
+    var instance = RongMeeting.instance;
     instance.$on('fullClick', function (event) {
       var target = event.target;
       var notHideSelector = '.rong-user-operate-share';
@@ -31,12 +31,15 @@
       },
       switchVolume: function () {
         var isMuted = !this.isMuted;
-        var instance = RongClass.instance;
+        var instance = RongMeeting.instance;
         utils.setAllMute(isMuted);
         instance.setMute(isMuted);
       },
       switchAudio: function () {
         var context = this;
+        if (context.isDisabled) {
+          return;
+        }
         var isAudioOpenedNow = this.isAudioOpened;
         var audioEnable = !isAudioOpenedNow;
         var switchEvent = audioEnable ? rtcServer.openAudio : rtcServer.closeAudio;
@@ -50,6 +53,9 @@
       },
       switchVideo: function () {
         var context = this;
+        if (context.isDisabled) {
+          return;
+        }
         var isVideoOpenedNow = this.isVideoOpened;
         var videoEnable = !isVideoOpenedNow;
         var switchEvent = videoEnable ? rtcServer.openVideo : rtcServer.closeVideo;
@@ -64,7 +70,7 @@
       },
       confirmHungup: function () {
         var context = this;
-        RongClass.dialog.confirm({
+        RongMeeting.dialog.confirm({
           content: '确定要退出会议吗 ?',
           confirmed: function () {
             context.hungup(true);
@@ -109,7 +115,7 @@
           return isAudience || this.isLoading;
         },
         isMuted: function () {
-          var instance = RongClass.instance || {};
+          var instance = RongMeeting.instance || {};
           return instance.isMuted;
         }
       },
@@ -124,6 +130,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

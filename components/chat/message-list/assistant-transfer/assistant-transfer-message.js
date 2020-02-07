@@ -1,8 +1,8 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    server = RongClass.dataModel.server;
+  var common = RongMeeting.common,
+    server = RongMeeting.dataModel.server;
 
   components.assistantTransferMessage = function (resolve) {
     var options = {
@@ -25,6 +25,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

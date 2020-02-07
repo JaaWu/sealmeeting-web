@@ -1,13 +1,13 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
   var win = dependencies.win;
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
-    chatServer = RongClass.dataModel.chat,
-    dialog = RongClass.dialog,
-    ErrorCode = RongClass.ErrorCode;
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
+    chatServer = RongMeeting.dataModel.chat,
+    dialog = RongMeeting.dialog,
+    ErrorCode = RongMeeting.ErrorCode;
 
   function upload(isImage, file) {
     var func = isImage ? chatServer.uploadImage : chatServer.uploadFile;
@@ -129,7 +129,7 @@
     common.component(options, resolve);
   };
   
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

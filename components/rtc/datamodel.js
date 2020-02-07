@@ -1,15 +1,15 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
-  var utils = RongClass.utils,
-    common = RongClass.common,
+  var utils = RongMeeting.utils,
+    common = RongMeeting.common,
     emitter = utils.EventEmitter,
     Promise = dependencies.win.Promise,
     RongScreenShare = dependencies.RongScreenShare,
-    ENUM = RongClass.ENUM,
+    ENUM = RongMeeting.ENUM,
     Event = ENUM.Event,
     RTCTag = ENUM.RTCTag;
 
-  var appkey = RongClass.setting.im.appKey;
+  var appkey = RongMeeting.setting.im.appKey;
 
   var RongIMLib = dependencies.RongIMLib,
     RongRTC = dependencies.RongRTC,
@@ -67,7 +67,7 @@
   }
 
   function getSelfMedia(resolution, videoEnable, audioEnable) {
-    resolution = resolution || RongClass.setting.rtc.resolution.default;
+    resolution = resolution || RongMeeting.setting.rtc.resolution.default;
     var video = videoEnable ? resolution : false;
     return RongMedia.get({ audio: !!audioEnable, video: video });
   }
@@ -135,7 +135,7 @@
       }
     };
     // TODO 暂时弹框, 后续先在 login 判断
-    var loading = RongClass.dialog.loading({ content: '正在加载屏幕共享插件...' });
+    var loading = RongMeeting.dialog.loading({ content: '正在加载屏幕共享插件...' });
     return RongScreenShare.get().then(function (stream) {
       user.stream.mediaStream = stream;
       loading.destroy();
@@ -334,12 +334,12 @@
     getStreamSwitch: getStreamSwitch
   };
 
-  RongClass.dataModel = RongClass.dataModel || {};
-  utils.extend(RongClass.dataModel, {
+  RongMeeting.dataModel = RongMeeting.dataModel || {};
+  utils.extend(RongMeeting.dataModel, {
     rtc: rtc
   });
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   RongIMLib: window.RongIMLib,
   RongRTC: window.RongRTC,
   RongMedia: window.RongMedia,

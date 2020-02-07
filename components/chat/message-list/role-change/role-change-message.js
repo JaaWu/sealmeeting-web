@@ -1,11 +1,11 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
-    ENUM = RongClass.ENUM,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
+    ENUM = RongMeeting.ENUM,
     RoleENUM = ENUM.Role,
-    server = RongClass.dataModel.server;
+    server = RongMeeting.dataModel.server;
 
   function getMethods() {
     return {
@@ -41,6 +41,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

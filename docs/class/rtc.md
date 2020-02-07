@@ -1,5 +1,7 @@
 ## 音视频展示区
 
+![image](../image/rtc.png)
+
 ### 文件位置
 
 `UI 模板`: components/rtc/rtc.html

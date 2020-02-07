@@ -1,8 +1,8 @@
-(function (RongClass, dependencies) {
+(function (RongMeeting, dependencies) {
   'use strict';
   var Vue = dependencies.Vue,
     win = dependencies.win,
-    utils = RongClass.utils;
+    utils = RongMeeting.utils;
 
   function textFormat(content, size) {
     var RongIMEmoji = win.RongIMLib.RongIMEmoji;
@@ -29,7 +29,7 @@
   } 
 
   function console() {
-    var isOpen = RongClass.setting.isDebug;
+    var isOpen = RongMeeting.setting.isDebug;
     var consoleDateTpl = 'yyyy-MM-dd hh:mm:ss';
     var logTypes = ['log', 'info', 'error', 'warn'];
     var logs = {};
@@ -49,7 +49,7 @@
    * 本地存储
    */
   function storage() {
-    var keyNS = 'rong-class-';
+    var keyNS = 'rong-meeting-';
 
     function isKeyExist(key) {
       // do not depend on value cause of '和0
@@ -112,10 +112,10 @@
    * @param {object} options 
    */
   function mountDialog(options) {
-    var classInstance = RongClass.instance;
+    var classInstance = RongMeeting.instance;
     options.parent = classInstance;
     var meetingData = utils.formatUrl();
-    var webLinkTpl = RongClass.setting.webLink.tpl;
+    var webLinkTpl = RongMeeting.setting.webLink.tpl;
     var computed = {
       meetingInfo: function () {
         return meetingData;
@@ -133,7 +133,7 @@
       }
     };
     var mixins = [
-      RongClass.mixins.locale
+      RongMeeting.mixins.locale
     ];
     var methods = {
       getUserName: getUserName
@@ -152,11 +152,11 @@
   }
 
   function component(options, resolve) {
-    var webLinkTpl = RongClass.setting.webLink.tpl;
-    var mobileLinkTpl = RongClass.setting.mobileLink.tpl;
+    var webLinkTpl = RongMeeting.setting.webLink.tpl;
+    var mobileLinkTpl = RongMeeting.setting.mobileLink.tpl;
     var meetingData = utils.formatUrl();
     var mixins = [
-      RongClass.mixins.locale
+      RongMeeting.mixins.locale
     ];
     var currentMixins = options.mixins || [];
     var methods = {
@@ -200,7 +200,7 @@
   }
   
   function addArrayById(list, detail) {
-    var ENUM = RongClass.ENUM,
+    var ENUM = RongMeeting.ENUM,
       RTCTag = ENUM.RTCTag;
     var newList = list.concat();
     var detailId = detail.userId || detail.id;
@@ -241,7 +241,7 @@
   }
 
   function getLoginUser(list, loginUserId) {
-    var instance = RongClass.instance || {};
+    var instance = RongMeeting.instance || {};
     var auth = instance.auth || {};
     loginUserId = auth.userId || loginUserId;
     var loginUser = {};
@@ -317,7 +317,7 @@
   }
 
   function sortByRole(list, userId) {
-    var RolePriority = RongClass.ENUM.RolePriority;
+    var RolePriority = RongMeeting.ENUM.RolePriority;
     var newList = list.sort(function (beforeUser, afterUser) {
       var beforePriority = RolePriority.indexOf(beforeUser.role);
       var afterPriority = RolePriority.indexOf(afterUser.role);
@@ -371,7 +371,7 @@
   function toast(content) {
     var destroyTimeout = 5000;
     var fn = function (runNext) {
-      RongClass.dialog.toast({
+      RongMeeting.dialog.toast({
         content: content,
         destroyTimeout: destroyTimeout,
         onDestoryed: runNext
@@ -391,7 +391,7 @@
         runNext();
         func && func();
       };
-      RongClass.dialog.call({
+      RongMeeting.dialog.call({
         user: user,
         content: content,
         accpeted: function () {
@@ -410,7 +410,7 @@
   }
 
   function getIMParams(token) {
-    var imSetting = RongClass.setting.im;
+    var imSetting = RongMeeting.setting.im;
     return {
       appKey: imSetting.appKey,
       navi: imSetting.navi,
@@ -428,8 +428,8 @@
     };
   }
 
-  RongClass = RongClass || {};
-  RongClass.common = {
+  RongMeeting = RongMeeting || {};
+  RongMeeting.common = {
     textFormat: textFormat,
     mountDialog: mountDialog,
     storage: storage(),
@@ -452,7 +452,7 @@
     getIMParams: getIMParams,
     getRTCParams: getRTCParams
   };
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
 });

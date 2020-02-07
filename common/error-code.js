@@ -1,4 +1,4 @@
-(function (RongClass) {
+(function (RongMeeting) {
   'use strict';
 
   /* 以下错误码都为当前应用自定义错误码 */
@@ -26,5 +26,5 @@
   }
 
   ErrorCode = formatErrorCode(ErrorCode);
-  RongClass.ErrorCode = ErrorCode;
-})(window.RongClass);
+  RongMeeting.ErrorCode = ErrorCode;
+})(window.RongMeeting);

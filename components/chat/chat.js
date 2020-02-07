@@ -1,15 +1,15 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
     emitter = utils.EventEmitter,
-    chatServer = RongClass.dataModel.chat;
+    chatServer = RongMeeting.dataModel.chat;
 
-  var Event = RongClass.ENUM.Event;
+  var Event = RongMeeting.ENUM.Event;
 
   function scrollToBottom() {
-    RongClass.instance.$emit('message-scroll-bottom');
+    RongMeeting.instance.$emit('message-scroll-bottom');
   }
 
   function getSendCallbacks(context) {
@@ -93,6 +93,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

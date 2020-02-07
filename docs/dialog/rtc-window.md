@@ -1,5 +1,7 @@
 ## 视频大窗口
 
+![image](../image/rtc-window.png)
+
 ### 文件位置
 
 `UI 模板`: dialog/dialog/rtc-window.html

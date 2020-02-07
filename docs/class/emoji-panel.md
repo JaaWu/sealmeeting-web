@@ -1,5 +1,7 @@
 ## Emoji 选择区
 
+![image](../image/emoji-panel.png)
+
 ### 文件位置
 
 `UI 模板`: components/emoji-panel/emoji-panel.html

@@ -1,6 +1,6 @@
-(function (RongClass) {
-  RongClass.locale = RongClass.locale || {};
-  RongClass.locale.en = {
+(function (RongMeeting) {
+  RongMeeting.locale = RongMeeting.locale || {};
+  RongMeeting.locale.en = {
     login: {
       classId: '输入会议 ID',
       classEmptyError: '会议 ID 不能为空',
@@ -20,4 +20,4 @@
       '-2000': '获取本地视频失败'
     }
   };
-})(window.RongClass);
+})(window.RongMeeting);

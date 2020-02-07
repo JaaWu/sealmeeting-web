@@ -1,6 +1,6 @@
-(function (RongClass) {
-  RongClass.locale = RongClass.locale || {};
-  RongClass.locale.zh = {
+(function (RongMeeting) {
+  RongMeeting.locale = RongMeeting.locale || {};
+  RongMeeting.locale.zh = {
     login: {
       classId: '输入会议 ID',
       classEmptyError: '会议 ID 不能为空',
@@ -18,7 +18,20 @@
       assistant: '主持人',
       teacher: '主讲人',
       student: '参会人',
-      audience: '列席'
+      audience: '列席',
+      share: '邀请加入会议',
+      setMic: '设置本地麦克风',
+      setCamra: '设置本地摄像头',
+      setVoice: '设置本地扬声器',
+      quit: '退出会议',
+      setAssistant: '转让主持人',
+      setTeacher: '设置主讲人',
+      setMemberMic: '设置成员麦克风',
+      setMemberCamera: '设置成员摄像头',
+      upgrade: '升级成员为参会人',
+      downgrade: '降级成员为列席',
+      kick: '将成员移出会议',
+      openWithOtherBrowser: '请在 Chrome 中使用屏幕共享功能'
     },
     errorCode: {
       '-10000': '网络不可用',
@@ -75,4 +88,4 @@
       '34': '设置主讲人角色失败'
     }
   };
-})(window.RongClass);
+})(window.RongMeeting);

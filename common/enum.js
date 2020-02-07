@@ -1,4 +1,4 @@
-(function (RongClass) {
+(function (RongMeeting) {
   'use strict';
 
   var BrowserType = {
@@ -155,6 +155,7 @@
     TOAST: 'toast',
     APPLY: 'down_grade',
     JOINING: 'joining',
+    MOBILE_TOAST: 'mobile-toast',
     BUTTONS: {
       CONFIRM: 'confirm',
       CANCEL: 'cancel',
@@ -163,8 +164,8 @@
     }
   };
 
-  RongClass = RongClass || {};
-  RongClass.ENUM = {
+  RongMeeting = RongMeeting || {};
+  RongMeeting.ENUM = {
     Event: Event,
     RTCTag: RTCTag,
     RoomAction: RoomAction,
@@ -183,4 +184,4 @@
     BrowserType: BrowserType
   };
 
-})(window.RongClass);
+})(window.RongMeeting);

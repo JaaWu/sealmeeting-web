@@ -1,8 +1,8 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils;
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils;
 
   components.classInfo = function (resolve) {
     var options = {
@@ -35,6 +35,6 @@
     common.component(options, resolve);
   };
   
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

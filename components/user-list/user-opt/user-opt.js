@@ -1,20 +1,20 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
   var win = dependencies.win;
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
     emitter = utils.EventEmitter,
     include = utils.include,
-    ENUM = RongClass.ENUM,
+    ENUM = RongMeeting.ENUM,
     Event = ENUM.Event,
     RoleENUM = ENUM.Role,
     RTCTag = ENUM.RTCTag,
     SpeechResultAction = ENUM.SpeechResultAction,
     UpgradeAction = ENUM.UpgradeAction,
-    dialog = RongClass.dialog,
-    MaxPersonCount = RongClass.setting.class.maxPersonCount,
-    server = RongClass.dataModel.server;
+    dialog = RongMeeting.dialog,
+    MaxPersonCount = RongMeeting.setting.class.maxPersonCount,
+    server = RongMeeting.dataModel.server;
 
   var HasSetAssistantRoles = [ RoleENUM.STUDENT, RoleENUM.TEACHER ],
     HasSetTeacherRoles = [ RoleENUM.STUDENT ],
@@ -162,7 +162,7 @@
   }
 
   function changeRole(role, user) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     var userName = common.getUserName(user),
       userId = common.getUserId(user);
     var promps = RoleMapPrompText[role],
@@ -194,7 +194,7 @@
   }
 
   function setMicro() {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     var enable = this.isAudioClosed,
       userId = this.userId,
       confirmTextTpl = '确定要{handle}成员的麦克风吗 ?',
@@ -224,7 +224,7 @@
   }
 
   function setCamera() {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     var enable = this.isVideoClosed,
       userId = this.userId,
       confirmTextTpl = '确定要{handle}成员的摄像头吗 ?',
@@ -296,7 +296,7 @@
   }
 
   function kick() {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     var userId = this.userId,
       userName = this.userName;
     confirmDialog('确定要将成员移出会议 ?').then(function () {
@@ -380,7 +380,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

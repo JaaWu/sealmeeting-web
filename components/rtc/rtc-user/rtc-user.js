@@ -1,16 +1,16 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
-    server = RongClass.dataModel.server,
-    rtcServer = RongClass.dataModel.rtc;
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
+    server = RongMeeting.dataModel.server,
+    rtcServer = RongMeeting.dataModel.rtc;
   
-  var RTCTag = RongClass.ENUM.RTCTag,
-    RoleEnum = RongClass.ENUM.Role,
+  var RTCTag = RongMeeting.ENUM.RTCTag,
+    RoleEnum = RongMeeting.ENUM.Role,
     RTCKey = RTCTag.RTC,
     ScreenShareKey = RTCTag.SCREENSHARE,
-    hasOpenedRTCWindow = RongClass.dialog.rtcWindow.Handler.hasOpened;
+    hasOpenedRTCWindow = RongMeeting.dialog.rtcWindow.Handler.hasOpened;
   
   var rtcBigDialog;
 
@@ -24,7 +24,7 @@
     }
     if (isShow) {
       var user = context.user;
-      rtcBigDialog = RongClass.dialog.rtcWindow(user, {
+      rtcBigDialog = RongMeeting.dialog.rtcWindow(user, {
         canceled: function () {
           context.isShowBig = false;
         }
@@ -108,12 +108,17 @@
         };
       },
       computed: {
+        isSelf: function () {
+          var loginUserId = server.getLoginUserId(),
+            user = this.user;
+          return loginUserId === user.id;
+        },
         isShowVideo: function () {
           var isShow = true;
           if (!this.isShowScreenShare) {
             isShow = this.isVideoOpened;
           }
-          return isShow && !this.isShowBig && !this.isAudience;
+          return isShow && !this.isAudience;
         },
         isVideoOpened: function () {
           var user = this.user || {};
@@ -133,6 +138,9 @@
         },
         isAudience: function () {
           return this.user.role === RoleEnum.AUDIENCE;
+        },
+        selfVideoClassName: function () {
+          return RongMeeting.instance.selfVideoClassName;
         }
       },
       watch: utils.extend({
@@ -140,8 +148,14 @@
           !this.isLoading && showStream(this);
         },
         isShowScreenShare: function (isShow) {
-          if (isShow && !this.isSelfScreenShare) {
+          // 屏幕共享, 但非自己共享(自己共享显示正在屏幕共享的文案)
+          var isShowAndNotSelf = isShow && !this.isSelfScreenShare;
+          if (isShowAndNotSelf) {
             showStream(this, ScreenShareKey);
+          }
+          // 组件未销毁, 且不再展示屏幕共享时, 展示视频流
+          if (!isShow) {
+            showStream(this, RTCKey);
           }
         }
       }, getWatch()),
@@ -179,6 +193,6 @@
     common.component(options, resolve);
   };
   
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

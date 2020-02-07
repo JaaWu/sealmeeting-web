@@ -1,17 +1,17 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
   var win = dependencies.win;
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
     emitter = utils.EventEmitter,
-    dataModel = RongClass.dataModel,
+    dataModel = RongMeeting.dataModel,
     server = dataModel.server,
-    dialog = RongClass.dialog;
+    dialog = RongMeeting.dialog;
 
-  var resolutionSetting = RongClass.setting.rtc.resolution;
+  var resolutionSetting = RongMeeting.setting.rtc.resolution;
 
-  var ENUM = RongClass.ENUM,
+  var ENUM = RongMeeting.ENUM,
     Event = ENUM.Event,
     RoleENUM = ENUM.Role,
     SpecialErrorCode = ENUM.SpecialErrorCode;
@@ -34,7 +34,7 @@
   }
 
   function toLoginPage() {
-    // var instance = RongClass.instance;
+    // var instance = RongMeeting.instance;
     // instance.$router.push({ name: 'login', params: { force: true } });
     win.location.href = './';
   }
@@ -52,7 +52,7 @@
   }
 
   function confirmHungup(text) {
-    var isConnected = RongClass.instance.auth;
+    var isConnected = RongMeeting.instance.auth;
     confirmDialog && confirmDialog.destroy();
     hungup();
     if (isConnected) {
@@ -84,7 +84,7 @@
   }
 
   function reconnectWhenNetworkUnavailable() {
-    var chatServer = RongClass.dataModel.chat;
+    var chatServer = RongMeeting.dataModel.chat;
     emitter.on(Event.NETWORK_UNAVAILABLE, function () {
       createLoading('网络已断开, 正在重连 ...');
       var onError = function (error) {
@@ -128,7 +128,7 @@
   }
 
   function toastMemberStatus() {
-    var auth = RongClass.instance.auth,
+    var auth = RongMeeting.instance.auth,
       members = auth.members,
       role = auth.loginUser.role;
     if (role === RoleENUM.AUDIENCE) {
@@ -247,7 +247,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

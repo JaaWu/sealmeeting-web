@@ -1,14 +1,14 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    utils = RongClass.utils,
-    server = RongClass.dataModel.server,
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils,
+    server = RongMeeting.dataModel.server,
     emitter = utils.EventEmitter,
-    dialog = RongClass.dialog,
-    MaxPersonCount = RongClass.setting.class.maxPersonCount;
+    dialog = RongMeeting.dialog,
+    MaxPersonCount = RongMeeting.setting.class.maxPersonCount;
 
-  var ENUM = RongClass.ENUM,
+  var ENUM = RongMeeting.ENUM,
     RoleENUM = ENUM.Role,
     Event = ENUM.Event,
     DeviceControlType = ENUM.DeviceControlType;
@@ -24,7 +24,7 @@
    * 同意列席发言(用户为主持人时)
    */
   function approveSpeech(context, user, ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.approveSpeech(ticket).then(function () {
       common.console.log('同意列席升级成功');
       // return changeRole(user, RoleENUM.STUDENT);
@@ -44,7 +44,7 @@
    * 拒绝列席发言(用户为主持人时)
    */
   function rejectSpeech(ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.rejectSpeech(ticket).then(function () {
       common.console.log('拒绝列席升级成功');
     }).catch(function (error) {
@@ -95,7 +95,7 @@
   }
 
   function approveUpgrade(ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.approveUpgrade(ticket).then(function () {
       // do nothing
     }).catch(function (error) {
@@ -108,7 +108,7 @@
   }
 
   function rejectUpgrade(ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.rejectUpgrade(ticket).then(function () {
       // do nothing
     }).catch(function (error) {
@@ -121,7 +121,7 @@
   }
 
   function approveControlDevice(ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.approveOpenDevice(ticket).then(function () {
       // do nothing
     }).catch(function (error) {
@@ -134,7 +134,7 @@
   }
 
   function rejectControlDevice(ticket) {
-    var locale = RongClass.instance.locale;
+    var locale = RongMeeting.instance.locale;
     server.rejectOpenDevice(ticket).then(function () {
       // do nothing
     }).catch(function (error) {
@@ -256,7 +256,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

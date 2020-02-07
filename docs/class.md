@@ -1,5 +1,7 @@
 ## 会议页面
 
+![image](image/login.png)
+
 ### 文件位置
 
 `UI 模板`: pages/class/class.html

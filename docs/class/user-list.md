@@ -1,5 +1,7 @@
 ## 用户列表
 
+![image](../image/user-list.png)
+
 ### 文件位置
 
 `UI 模板:` components/user-list/user-list.html

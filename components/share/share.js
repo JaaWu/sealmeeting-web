@@ -1,10 +1,10 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
   var win = dependencies.win;
-  var common = RongClass.common,
-    utils = RongClass.utils;
+  var common = RongMeeting.common,
+    utils = RongMeeting.utils;
 
-  var webLinkTpl = RongClass.setting.webLink.tpl;
+  var webLinkTpl = RongMeeting.setting.webLink.tpl;
 
   function getMethods() {
     return {
@@ -13,13 +13,13 @@
         common.toast('邀请信息已复制');
       },
       sendEmail: function () {
-        var auth = RongClass.instance.auth || {};
+        var auth = RongMeeting.instance.auth || {};
         var userName = auth.loginUser.userName;
         var roomId = auth.roomId;
         utils.sendEmail(userName, roomId, this.meetingUrl);
       },
       showQRCode: function () {
-        RongClass.dialog.shareQRCode(this.meetingUrl);
+        RongMeeting.dialog.shareQRCode(this.meetingUrl);
       }
     };
   }
@@ -34,13 +34,13 @@
       },
       computed: {
         emailUrl: function () {
-          var auth = RongClass.instance.auth || {};
+          var auth = RongMeeting.instance.auth || {};
           var userName = auth.loginUser.userName;
           var roomId = auth.roomId;
           return utils.getEmailUrl(userName, roomId, this.meetingUrl);
         },
         meetingUrl: function () {
-          var classInfo = RongClass.instance.auth,
+          var classInfo = RongMeeting.instance.auth,
             location = win.location,
             url = location.origin + location.pathname,
             password = classInfo.password || '',
@@ -62,7 +62,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

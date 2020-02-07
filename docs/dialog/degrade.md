@@ -1,5 +1,7 @@
 ## 降级弹框
 
+![image](../image/degrade.png)
+
 ### 文件位置
 
 `UI 模板`: dialog/dialog/degrade.html

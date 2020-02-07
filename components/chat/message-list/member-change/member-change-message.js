@@ -1,8 +1,8 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
 
-  var common = RongClass.common,
-    RoomAction = RongClass.ENUM.RoomAction;
+  var common = RongMeeting.common,
+    RoomAction = RongMeeting.ENUM.RoomAction;
 
   function getMethods() {
     return {
@@ -38,6 +38,6 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue
-}, window.RongClass.components);
+}, window.RongMeeting.components);

@@ -1,5 +1,7 @@
 ## 会议信息
 
+![image](../image/class-info.png)
+
 ### 文件位置
 
 `UI 模板`: components/class-info/class-info.html

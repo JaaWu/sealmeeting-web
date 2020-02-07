@@ -1,5 +1,7 @@
 ## 消息区
 
+![image](../image/chat.png)
+
 ### 文件位置
 
 `UI 模板`: components/chat/chat.html

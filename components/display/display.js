@@ -1,17 +1,17 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
-  var common = RongClass.common,
-    dialog = RongClass.dialog,
-    utils = RongClass.utils,
-    ENUM = RongClass.ENUM,
+  var common = RongMeeting.common,
+    dialog = RongMeeting.dialog,
+    utils = RongMeeting.utils,
+    ENUM = RongMeeting.ENUM,
     DisplayType = ENUM.DisplayType,
     RoleENUM = ENUM.Role,
     RTCTag = ENUM.RTCTag,
     Event = ENUM.Event;
   
   var emitter = utils.EventEmitter,
-    server = RongClass.dataModel.server,
-    rtcServer = RongClass.dataModel.rtc,
+    server = RongMeeting.dataModel.server,
+    rtcServer = RongMeeting.dataModel.rtc,
     DefaultDisplay = {
       type: DisplayType.NONE,
       whiteboardId: null,
@@ -33,7 +33,7 @@
   }
 
   function showScreenPluginInstallDiloag() {
-    var path = RongClass.setting.rtc.screenPluginPath;
+    var path = RongMeeting.setting.rtc.screenPluginPath;
     dialog.confirm({
       content: '首次使用屏幕共享, 请下载并安装插件',
       cancelName: '不需要',
@@ -64,7 +64,7 @@
   }
 
   function hideSourceListWhenFullClick(context) {
-    var instance = RongClass.instance;
+    var instance = RongMeeting.instance;
     instance.$on('fullClick', function (event) {
       var target = event.target;
       var notHideSelector = '.rong-display-icon-box, .rong-recent-share-box';
@@ -110,6 +110,9 @@
       displayScreenShare: function () {
         var context = this,
           loginUserId = server.getLoginUserId();
+        if (context.isScreenShareDisable) {
+          return;
+        }
         var display = {
           type: DisplayType.SCREEN,
           userId: loginUserId
@@ -183,6 +186,9 @@
           var display = this.display;
           return display.type === DisplayType.SCREEN;
         },
+        isScreenShareDisable: function () {
+          return this.isScreenShareDisplaying || !this.isChrome;
+        },
         isChrome: function () {
           var browserName = utils.getBrowser().type;
           return browserName === 'Chrome';
@@ -198,30 +204,6 @@
         'display.type': function () {
           closeScreenShare(this);
         }
-        // 'display.userId': function (newUserId, oldUserId) {
-        //   var newUser = server.getUserById(newUserId),
-        //     oldUser = server.getUserById(oldUserId);
-        //   var newUserStream = newUser[RTCTag.RTC],
-        //     oldUserStream = newUser[RTCTag.RTC];
-        //   !isUserEmpty(newUserStream) && rtcServer.resizeStream({
-        //     id: newUserId,
-        //     stream: newUserStream
-        //   }, true).then(function () {
-        //     common.console.warn(newUserId + ' 切换大流成功');
-        //   }).catch(function (error) {
-        //     common.console.warn(newUserId + ' 切换大流失败');
-        //     console.error(error);
-        //   });
-        //   !isUserEmpty(oldUserStream) && rtcServer.resizeStream({
-        //     id: oldUserId,
-        //     stream: oldUserStream
-        //   }, false).then(function () {
-        //     common.console.warn(oldUserId + ' 切换小流成功');
-        //   }).catch(function (error) {
-        //     common.console.warn(oldUserId + ' 切换小流失败');
-        //     console.error(error);
-        //   });
-        // }
       },
       mounted: function () {
         var classInfo = this.classInfo,
@@ -237,7 +219,7 @@
     common.component(options, resolve);
   };
 
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

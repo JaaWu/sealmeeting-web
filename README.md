@@ -1,12 +1,12 @@
 ## SealMeeting Web
 
-SealMeeting 是以音视频和 IM 能力为基础，满足参会人快速发起会议、高效开会、多渠道邀请和一键入会等全方位视频会议场景需要的 Demo
+基于 RongRTC、RongIMLib 的在线会议 Demo
 
 ## 快速运行
 
 1、通过[融云官网](https://developer.rongcloud.cn/signup?_blank)注册账号, 获取 AppKey
 
-2、按步骤启动 [SealMeeting Server](https://github.com/rongcloud/sealmeeting-server?_blank)
+2、按步骤启动 [SealMeeting Server](https://github.com/rongcloud/sealclass-server?_blank)
 
 3、将 AppKey、Server 地址 填入 setting.js
 

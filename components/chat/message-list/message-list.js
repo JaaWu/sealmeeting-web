@@ -1,11 +1,11 @@
-(function (RongClass, dependencies, components) {
+(function (RongMeeting, dependencies, components) {
   'use strict';
   var win = dependencies.win,
     RongIMLib = win.RongIMLib,
-    dataModel = RongClass.dataModel,
+    dataModel = RongMeeting.dataModel,
     server = dataModel.server;
 
-  var common = RongClass.common;
+  var common = RongMeeting.common;
 
   var SupportMessageList = [
     'TextMessage',
@@ -37,7 +37,7 @@
   }
 
   function watchScrollToBottom(context) {
-    var instance = RongClass.instance;
+    var instance = RongMeeting.instance;
     instance.$on('message-scroll-bottom', function () {
       instance.$nextTick(function () {
         var refs = context.$refs;
@@ -120,7 +120,7 @@
     common.component(options, resolve);
   };
   
-})(window.RongClass, {
+})(window.RongMeeting, {
   Vue: window.Vue,
   win: window
-}, window.RongClass.components);
+}, window.RongMeeting.components);

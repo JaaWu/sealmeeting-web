@@ -6,7 +6,7 @@
 
 1、通过[融云官网](https://developer.rongcloud.cn/signup?_blank)注册账号, 获取 AppKey
 
-2、按步骤启动 [SealMeeting Server](https://github.com/rongcloud/sealclass-server?_blank)
+2、按步骤启动 [SealMeeting Server](https://github.com/rongcloud/sealmeeting-server?_blank)
 
 3、将 AppKey、Server 地址 填入 setting.js
 

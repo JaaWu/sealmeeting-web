@@ -43,7 +43,7 @@
     isDebug: true
   };
 
-  win.RongClass = win.RongClass || {
+  win.RongMeeting = win.RongMeeting || {
     locale: {},
     components: {},
     dialog: {},
